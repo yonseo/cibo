@@ -13,6 +13,8 @@ Coming Soon:
 Who is this framework for?
 Anyone who is new to the MVC pattern and wants to learn building web applications.
 
+To get started download the files and start a local server. Open the home page and read the guide.
+
 Cibo MVC is under an MIT license.
 
 credits: 
