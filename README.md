@@ -16,4 +16,4 @@ Cibo MVC is under an MIT license.
 
 credits: 
 https://yonseo.com
-yonseoart@gmail.com
+
