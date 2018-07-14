@@ -1,0 +1,13 @@
+<?php include VIEW . 'header.php'; ?>
+
+<h3>About us </h3>
+<p>
+credits:
+<ul>
+	<li>Yonseo</li>
+	<li><a href="https://yonseo.com">https://yonseo.com</a></li>
+	<li>yonseoart@gmail.com</li>
+</ul>
+</p>
+
+<?php include VIEW . 'footer.php'; ?>

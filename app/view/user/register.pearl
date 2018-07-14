@@ -1,0 +1,35 @@
+<?php include VIEW . 'header.php'; ?>
+
+<h1>Register</h1>
+<div class="wrapper">
+<div class="register-box">
+<form action="/user/register" method="post" enctype="multipart/form-data">
+
+<?php 
+$error = $data; 
+$data = $data; 
+?>
+
+<label><?php echo $error['name_err']; ?></label></br>
+<input type="text" name="reg_username" placeholder="username" value="<?php echo $data['name']; ?>"/> </br>
+
+<label><?php echo $error['email_err']; ?>
+</label></br><input type="email" name="reg_email" placeholder="email" value="<?php echo $data['email']; ?>"/> </br>
+
+<label><?php echo $error['password_err']; ?>
+</label></br><input type="password" name="password" placeholder="password" value="<?php echo $data['password']; ?>"></br>
+
+<label><?php echo $error['confirm_password_err']; ?>
+</br></label> <input type="password" name="confirm_password" placeholder="confirm password" value="<?php echo $data['confirm_password']; ?>"></br>
+
+<div class="buttony"><button type="submit" value="register" name="register_user">register</button></div>
+
+</form></br>
+Already a member? <a href="/user/login">Log in</a>
+</div>
+</div>
+
+
+
+
+<?php include VIEW . 'footer.php'; ?>

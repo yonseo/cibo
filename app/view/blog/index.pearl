@@ -1,0 +1,16 @@
+<?php include VIEW . 'header.php'; ?>
+
+<h1>Blog</h1>
+
+<?php 
+foreach($data as $value){
+	echo '<div class="blog_post"> ';
+	echo '<h3>'.$value['posts_title'].'</h3></br>';
+	echo $value['posts_desc'].'</br>';
+	echo '<b>'.$value['posts_author'].'</b></br>';
+	echo '<button>READ MORE</button></br>';
+	echo '</div>';
+}
+?>
+
+<?php include VIEW . 'footer.php'; ?>

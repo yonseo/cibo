@@ -1,0 +1,25 @@
+<?php include VIEW . 'header.php'; ?>
+
+
+<h1>Login</h1>
+<div class="wrapper">
+<div class="login-box">
+<form action="/user/login" method="post">
+<?php 
+$error = $data; 
+$data = $data; 
+
+?>
+<?php //include('errors.php'); ?>
+<label><?php echo $error['email_err']; ?></label></br><input type="email" name="login_email" placeholder="email" value="<?php echo $data['email']; ?>"/> </br>
+<label><?php echo $error['password_err']; ?></label></br><input type="password" name="password" placeholder="password" value="<?php echo $data['password']; ?>"></br>
+<div class="buttony">	<button type="submit" value="login" name="login_user">login</button></div>
+
+</form>
+Not a member? <a href="/user/register">Register</a>
+</div></div>
+
+
+
+
+<?php include VIEW . 'footer.php'; ?>

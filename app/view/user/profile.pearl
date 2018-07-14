@@ -1,0 +1,72 @@
+<?php include VIEW . 'header.php'; ?>
+
+
+<h1>Profile</h1>
+<p><?php echo $data['hello']; ?></p>
+<p>This is the user profile page.</p>
+<p>To get data to display on this page simply use <b>echo $data['hello']</b>. 
+	This data is created at the controller, the controller must first fetch it from the model to have it available to display on the view.
+Here's what this page controller looks like.</p>
+<code>userController<pre>
+class userController extends Controller{
+	public function profile(){
+		
+		$data = [
+		  'hello' => 'hello world'
+		];
+		$this->view('user\profile', $data);
+	}
+}
+</pre></code>
+
+<p>Now lets get some data from a model. To do that we need to change our code. With these lines of code we can get the model file which holds custom database functions. The current model file we are looking for is named 'user'.
+Once the file is found we assign a variable to the object, in our case it's named $userModel. Then we use that object to 
+fetch the method. 
+</p>
+<code>Fetching data from a model<pre>
+$userModel = $this->model('user');
+$data = $userModel->myMethod();
+</pre></code>
+<p>Our changed code should now look like this.</p>
+<code>Our changed Code<pre>
+class userController extends Controller{
+	public function profile(){
+		$userModel = $this->model('user');
+		$data = $userModel->myMethod();
+		$this->view('user\profile', $data);
+	}
+}
+</pre></code>
+
+<h2>Let's break it down</h2>
+<p>Essentially what is happening behind the scenes is we are looking for a model file named <b>user.php</b> inside the model folder.
+Then assign a variable to this object
+named $userModel .</p>
+<code><pre>
+
+	$userModel = $this->model('user');
+
+</pre></code>
+
+<p>Once the model file is found inside that file we look for a method to use that will return the data. Again we assign a variable to this because it will return the data we need for the view.</p>
+<code><pre>
+
+	$data = $userModel->myMethod();
+
+</pre></code>
+
+<p>Finally we take that $data and pass it to the view. The first parameter looks for a view page which is the one we are seeing now. 
+The second parameter looks for data if any to be used on the given page.</p>
+
+<code><pre>
+
+	$this->view('user\profile', $data);
+
+</pre></code>
+<p> 'user\profile' can be found in the view folder. Fairly simple don't you think?</p>
+
+
+
+
+
+<?php include VIEW . 'footer.php'; ?>

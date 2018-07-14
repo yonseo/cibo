@@ -1,0 +1,151 @@
+<?php include VIEW . 'header.php'; ?>
+
+<h1>Welcome to Cibo MVC Framework</h1>
+<p>Cibo (pronounced Shi-bo) is a minimal framework for building web apps named after Cibo from the blame manga series.
+<ul>
+  <b>CIBO comes ready with:</b>
+  <li>- login systen</li>
+  <li></li>
+</ul>
+<ul>
+  <b>Coming Soon:</b>
+  <li>- breadcrumb</li>
+  <li>- CRUD</li>
+  <li>- search</li>
+  <li>- template</li>
+</ul>
+<h5>Who is this framework for?</h5>
+<p>Anyone who is new to the MVC pattern and wants to learn building web applications.</p>
+
+
+</p>
+
+
+
+<h3>Getting Started</h3>
+<p>Setting up Cibo is extremely easy. Inside the sql folder you will find all the neccessary data to create a database.
+First create a database and name it <b>cibo_db</b>. Once you created and named your database
+head over to phpMyadmin, select your database, and simply take the sql file and import it into your newly created database and hit the go button at the bottom.</p>
+<img src="/Screenshot_2.jpg">
+<h3>Connecting to the Database</h3>
+<p>The database settings are found in the core folder in a file named Kon.php. Replace <b>localhost, root, root, cibo_db</b> with your own
+credentials. For now the defaults are fine for developing on a local server. If you're using xampp you may need to leave the password field blank.</p>
+<code><pre>
+  class Kon{
+    protected function dbconnect(){
+        $host = $this->servername = "localhost";
+        $username = $this->username = "root";
+        $password = $this->password = "root";
+        $dbname = $this->dbname = "cibo_db";
+
+        //set DSN
+        $dsn = 'mysql:host=' . $host . ';dbname=' . $dbname;
+        //create a pdo instance
+        $link = new PDO($dsn, $username, $password);
+        //procedural connection
+        //$link = mysqli_connect($host,$username,$password,$dbname);
+
+      // Check connection
+      if (!$link){
+        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+      }else if ($link){
+        return $link;
+      }
+    }//end dbconnect
+}// end Kon
+</pre></code>
+<h4>User Login</h4>
+<p><b>username:</b> cibo@email.com</br> <b>password:</b> 123456</p>
+
+
+
+<h3>Tutorial</h3>
+<h6>Creating a Blog</h6>
+<p>This tutorial is here to guide you through this mvc framework so you can start building apps.</p>
+<img src="/Screenshot_3.jpg">
+<p>Make a folder inside the view directory: app/view. Let's name this folder blog.
+Inside the blog folder create a index.pearl file.
+This is the home page for our blog. Inside the index.pearl file contains a header and a footer as shown in the image.
+All .pearl files will have a header and a footer.</p>
+
+<img src="/Screenshot_1.jpg">
+
+<p><h3>What is a .pearl file?</h3> A pearl file is simply a template for the view of a page.
+It is named pearl to let us know that it is a view template. When you see .pearl file you know it's a page view.</p>
+
+<p><h3>Make a Controller</h3>
+  Now we need to create a controller. Head over to directory app/controller. Now inside this folder create a file named blogController.php
+.It's important to name your file using lowercase and only capitalize the letter 'C' in Controller. It helps to stay organized and
+ avoid confusion as we develop an application.</p>
+<img src="/Screenshot_4.jpg">
+  <p><h4>Why do we need this controller file?</h4>
+  A controller is like the handlebars on a bycicle. You need it to navigate and control your bike. In our case we need it to control
+  and interact with our blog. Without a controller it is like riding a bike without handlebars. </p>
+  <p>Now lets look at the code that goes inside the controller we created. </p>
+  <code><pre>
+class blogController extends Controller{
+
+  public function index(){
+    $blogModel = $this->model('blog');
+    $data = $blogModel->getPosts();
+    $this->view('blog\index', $data);
+  }
+  public function article(){
+    $blogModel = $this->model('blog');
+    $data = $blogModel->getArticles();
+    $this->view('home\index', $data);
+  }
+
+}//end homeController
+  </pre></code>
+
+  <p>First we have a class named exactly the same as the file name.
+  When you make a controller file your class is named the same as your file name.</p>
+  <p>Inside our class we have functions that we call methods, these methods are also called actions. The words method and action are used
+  interchangeably. If a function is inside a class it is called a method, if a function is outside a class it is called a function.
+  If a class has methods it is called an object.
+  It can be confusing at first but it all makes
+  sense when you start building apps.</p>
+
+  <p>Our blogController will have a method named public function index() This is where our code will go for the index.pearl file
+    we created earlier in the blog folder. It will also contain an article method so we can view a selected article. </p>
+  
+
+
+  <p>
+    The controller is like the handle bars on our bike, it guides or directs us but the controller does
+   not do the work. We need some pedal power to move the bike and we need some data to see in front of us. And that is the job of the model. So lets make a model. Head over to the model directory at app/model and create a blog.php file. Inside that file paste this code.</p>
+   <code><pre>
+class blog extends Cibo{
+
+  public function getPosts(){
+    $sql = "SELECT * FROM cibo_posts";
+    $stmt = $this->CiboQUERY($sql);
+    $stmt->execute();
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $data;
+  }
+}//end blog object
+   </pre></code>
+<p>The models job is to fetch data from the database. It contains methods that need to execute repeatedly for the app to function.
+In this method we are fetching data for the all the posts to display on the blog page. To be able to see this data in the view we need to pass this
+data to the view method in the controller. We did this earlier so now lets update the blog view page with this code.</p>
+
+<code><pre>
+foreach($data as $value){
+
+  echo $value['posts_title'];
+  echo $value['posts_desc'];
+  echo $value['posts_author'];
+ 
+}
+</pre></code>
+<p>It will display all the blog posts and you can add html and css to style each blog post data. To see the final result head over to the 
+blog page.</p>
+
+<h3>A Challenge</h3>
+<p>In this tutorial you made a blog page with data. Each blog post has a 'read more' button. When a user clicks the button it should redirect the user to view a selected single article. Now you need to create the page
+to view a single article. Then make a method inside the blogController, fetch some data from the model and send it to the view.</p>
+<p>Happy Coding!</p>
+
+<?php include VIEW . 'footer.php'; ?>
