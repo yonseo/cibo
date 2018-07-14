@@ -1,5 +1,5 @@
 # cibo
-Cibo (pronounced Shi-bo) is a minimal framework for building web apps named after Cibo from the blame manga series.
+Cibo (pronounced Shi-bo) is a minimal php framework for building web apps named after Cibo from the blame manga series.
 
 CIBO comes ready with:
 - login systen
